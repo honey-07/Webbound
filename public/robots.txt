@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://webbound.dev/sitemap.xml
+
+# Disallow admin and api routes
+Disallow: /api/
+Disallow: /admin/
