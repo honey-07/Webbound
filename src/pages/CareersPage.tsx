@@ -257,10 +257,10 @@ const CareersPage: React.FC = () => {
                       {position.description}
                     </p>
                   </div>
-                  
-                  <button className="brutalist-button lg:ml-8 lg:mt-0 mt-4">
+
+                  <a href='mailto:careers@webbound.dev' className="brutalist-button lg:ml-8 lg:mt-0 mt-4">
                     APPLY NOW
-                  </button>
+                  </a>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-8">

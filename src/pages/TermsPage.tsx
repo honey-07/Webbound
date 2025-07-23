@@ -2,7 +2,7 @@ import React from 'react';
 import { Shield, FileText, AlertTriangle, Scale } from 'lucide-react';
 
 const TermsPage: React.FC = () => {
-  const lastUpdated = 'January 15, 2025';
+  const lastUpdated = 'July 15, 2025';
 
   const sections = [
     {
@@ -243,7 +243,7 @@ const TermsPage: React.FC = () => {
             <div className="space-y-2 text-gray-600 dark:text-gray-400">
               <p><strong>Email:</strong> legal@webbound.dev</p>
               <p><strong>Address:</strong> 9169 W State St #2156, Garden City, ID 83714</p>
-              <p><strong>Phone:</strong> +1 (208) 900-9315</p>
+              <p><strong>Phone:</strong> +1 (208) 408 1463</p>
             </div>
           </section>
         </div>
@@ -257,9 +257,9 @@ const TermsPage: React.FC = () => {
             <p className="text-gray-600 dark:text-gray-400 mb-6">
               Our legal team is here to help clarify any questions you may have.
             </p>
-            <button className="brutalist-button">
+            <a href="mailto:legal@webbound.dev" className="brutalist-button">
               CONTACT LEGAL TEAM
-            </button>
+            </a>
           </div>
         </div>
       </div>

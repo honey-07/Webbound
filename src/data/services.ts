@@ -1,11 +1,11 @@
-import Website from "../assets/Website.jpeg"
-import Mobile from "../assets/Mobile.jpeg"
-import CustomIT from "../assets/CustomIT.jpeg"
-import Marketing from "../assets/Marketing.jpeg"
-import Whatsapp from "../assets/Whatsapp.jpeg"
-import Desktop from "../assets/Desktop.jpeg"
-import AI from "../assets/AI.jpeg"
-import Ecommerce from "../assets/Ecommerce.jpeg"
+import Website from "../assets/Website.webp"
+import Mobile from "../assets/Mobile.webp"
+import CustomIT from "../assets/CustomIT.webp"
+import Marketing from "../assets/Marketing.webp"
+import Whatsapp from "../assets/Whatsapp.webp"
+import Desktop from "../assets/Desktop.webp"
+import AI from "../assets/AI.webp"
+import Ecommerce from "../assets/Ecommerce.webp"
 
 export interface Service {
   id: string;

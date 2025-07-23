@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Moon, Sun, Code, Zap, ChevronDown } from 'lucide-react';
-import Logo from '../assets/logo.png'
+import Logo from '../assets/logo.webp'
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -115,7 +114,7 @@ const Header: React.FC = () => {
 
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className="lg:hidden p-2 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? (
@@ -129,8 +128,34 @@ const Header: React.FC = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg max-h-screen overflow-y-auto">
-            <nav className="container mx-auto px-4 py-4">
+          <div className="lg:hidden absolute top-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg max-h-screen overflow-y-auto z-50 animate-slideDown">
+            {/* Mobile Menu Header */}
+            <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-6 animate-fadeIn">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center">
+                    <img src={Logo} alt="Webbound logo" className='rounded-lg w-8 h-8' />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-white">
+                      WEBBOUND<span className="text-blue-200">.DEV</span>
+                    </h2>
+                    <p className="text-white/80 text-xs font-mono">
+                      DIGITAL SOLUTIONS
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={closeMenus}
+                  className="p-2 rounded-lg flex justify-center items-center bg-white/10 hover:bg-white/20 transition-colors"
+                  aria-label="Close menu"
+                >
+                  <X className="w-5 h-5 text-white" />
+                </button>
+              </div>
+            </div>
+            
+            <nav className="px-4 py-4 animate-fadeInUp">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
@@ -183,7 +208,7 @@ const Header: React.FC = () => {
       {/* Overlay for mobile menu */}
       {(isMenuOpen || isServicesOpen) && (
         <div 
-          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 lg:hidden animate-overlay"
           onClick={closeMenus}
         />
       )}

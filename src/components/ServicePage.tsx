@@ -137,12 +137,12 @@ const ServicePage: React.FC = () => {
                 Let's discuss your project requirements and create a solution that drives results.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="brutalist-button">
+                <Link to='/contact' className="brutalist-button">
                   START YOUR PROJECT
-                </button>
-                <button className="px-8 py-3 border-2 border-gray-800 dark:border-gray-200 text-gray-800 dark:text-gray-200 hover:bg-gray-800 hover:text-white dark:hover:bg-gray-200 dark:hover:text-gray-800 transition-colors">
+                </Link>
+                <a href='https://calendly.com/webbound/30min' className="px-8 py-3 border-2 flex items-center  border-gray-800 dark:border-gray-200 text-gray-800 dark:text-gray-200 hover:bg-gray-800 hover:text-white dark:hover:bg-gray-200 dark:hover:text-gray-800 transition-colors">
                   GET FREE CONSULTATION
-                </button>
+                </a>
               </div>
             </div>
           </div>

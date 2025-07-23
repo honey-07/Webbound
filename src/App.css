@@ -382,3 +382,97 @@ body {
     padding-bottom: 3rem;
   }
 }
+
+/* Mobile Menu Animations */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.animate-fadeInScale {
+  animation: fadeInScale 0.3s ease-out forwards;
+}
+
+/* Stagger animation for menu items */
+.animate-fadeInUp > * {
+  opacity: 0;
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+.animate-fadeInUp > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.animate-fadeInUp > *:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.animate-fadeInUp > *:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.animate-fadeInUp > *:nth-child(4) {
+  animation-delay: 0.25s;
+}
+
+.animate-fadeInUp > *:nth-child(5) {
+  animation-delay: 0.3s;
+}
+
+.animate-fadeInUp > *:nth-child(6) {
+  animation-delay: 0.35s;
+}
+
+/* Overlay fade animation */
+.animate-overlay {
+  animation: fadeIn 0.2s ease-out forwards;
+}

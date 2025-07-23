@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Twitter, Linkedin, Instagram } from 'lucide-react';
-import Logo from '../assets/logo.png'
+import Logo from '../assets/logo.webp'
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
@@ -60,7 +60,7 @@ const Footer: React.FC = () => {
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="w-4 h-4 lg:w-5 lg:h-5 text-green-400 flex-shrink-0" />
-                <span className="text-gray-400 text-sm lg:text-base">+1 (208) 900-9315</span>
+                <span className="text-gray-400 text-sm lg:text-base">+1 (208) 408 1463</span>
               </div>
               <div className="flex items-start space-x-3">
                 <MapPin className="w-4 h-4 lg:w-5 lg:h-5 text-purple-400 flex-shrink-0 mt-0.5" />
@@ -74,12 +74,12 @@ const Footer: React.FC = () => {
           {/* Services */}
           <div>
             <h4 className="text-lg font-semibold mb-4 text-white">Services</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-1 md:space-y-2">
               {footerLinks.services.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="text-gray-400 hover:text-white transition-colors text-sm lg:text-base block py-1"
+                    className="text-gray-400 flex items-center hover:text-white transition-colors text-sm lg:text-base block py-0.5 md:py-1"
                   >
                     {link.name}
                   </Link>
@@ -91,12 +91,12 @@ const Footer: React.FC = () => {
           {/* Company */}
           <div>
             <h4 className="text-lg font-semibold mb-4 text-white">Company</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-1 md:space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="text-gray-400 hover:text-white transition-colors text-sm lg:text-base block py-1"
+                    className="text-gray-400 flex items-center hover:text-white transition-colors text-sm lg:text-base block py-0.5 md:py-1"
                   >
                     {link.name}
                   </Link>
@@ -108,12 +108,12 @@ const Footer: React.FC = () => {
           {/* Support & Legal */}
           <div>
             <h4 className="text-lg font-semibold mb-4 text-white">Legal</h4>
-            <ul className="space-y-2">
+            <ul className="space-y-1 md:space-y-2">
               {footerLinks.legal.map((link) => (
                 <li key={link.name}>
                   <Link
                     to={link.href}
-                    className="text-gray-400 hover:text-white transition-colors text-sm lg:text-base block py-1"
+                    className="text-gray-400 flex items-center hover:text-white transition-colors text-sm lg:text-base block py-0.5 md:py-1"
                   >
                     {link.name}
                   </Link>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import SEO from './components/SEO';
+import ScrollToTop from './components/ScrollToTop';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import Services from './components/Services';
@@ -13,6 +14,7 @@ import ContactPage from './pages/ContactPage';
 import CareersPage from './pages/CareersPage';
 import TermsPage from './pages/TermsPage';
 import PrivacyPage from './pages/PrivacyPage';
+import NotFoundPage from './pages/NotFoundPage';
 import './App.css';
 
 function App() {
@@ -22,7 +24,7 @@ function App() {
     // Simulate initial loading
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -42,6 +44,7 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
+        <ScrollToTop />
         <SEO 
           title="Webbound.dev - Modern Technology Solutions Website"
           description="Leading provider of web development, mobile apps, custom IT solutions, and digital marketing services. Transform your business with our cutting-edge technology solutions."
@@ -64,6 +67,7 @@ function App() {
             <Route path="/careers" element={<CareersPage />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
           <Footer />
         </div>

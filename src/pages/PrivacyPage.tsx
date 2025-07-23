@@ -2,7 +2,7 @@ import React from 'react';
 import { Shield, Eye, Lock, Database, Cookie, UserCheck } from 'lucide-react';
 
 const PrivacyPage: React.FC = () => {
-  const lastUpdated = 'January 15, 2025';
+  const lastUpdated = 'July 15, 2025';
 
   const sections = [
     {
@@ -405,7 +405,7 @@ const PrivacyPage: React.FC = () => {
                 <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">General Inquiries</h3>
                 <div className="space-y-2 text-gray-600 dark:text-gray-400">
                   <p><strong>Email:</strong> privacy@webbound.dev</p>
-                  <p><strong>Phone:</strong> +1 (208) 900-9315</p>
+                  <p><strong>Phone:</strong> +1 (208) 408 1463</p>
                   <p><strong>Address:</strong> 9169 W State St #2156, Garden City, ID 83714</p>
                 </div>
               </div>
@@ -431,9 +431,9 @@ const PrivacyPage: React.FC = () => {
             <p className="text-gray-600 dark:text-gray-400 mb-6">
               Our privacy team is here to help you understand and exercise your rights.
             </p>
-            <button className="brutalist-button">
+            <a href="mailto:privacy@webbound.dev" className="brutalist-button">
               CONTACT PRIVACY TEAM
-            </button>
+            </a>
           </div>
         </div>
       </div>

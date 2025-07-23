@@ -1,12 +1,12 @@
 import React from 'react';
 import { Users, Award, Clock, Shield, Target, Lightbulb, Heart, Zap } from 'lucide-react';
 import SEO from '../components/SEO';
+import { Link } from 'react-router-dom';
 
 const AboutPage: React.FC = () => {
   const stats = [
     { icon: Users, value: '50+', label: 'Happy Clients' },
     { icon: Award, value: '100+', label: 'Projects Completed' },
-    { icon: Clock, value: '5+', label: 'Years Experience' },
     { icon: Shield, value: '99.9%', label: 'Uptime Guarantee' },
   ];
 
@@ -163,7 +163,7 @@ const AboutPage: React.FC = () => {
           </div>
 
           {/* Team */}
-          <div className="mb-20">
+          {/* <div className="mb-20">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
                 MEET OUR <span className="gradient-text">TEAM</span>
@@ -189,7 +189,7 @@ const AboutPage: React.FC = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
           {/* Process */}
           <div className="brutalist-container p-8 bg-white dark:bg-gray-800 mb-20">
@@ -228,12 +228,10 @@ const AboutPage: React.FC = () => {
                 Let's discuss how we can transform your ideas into digital reality and drive your business forward.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="brutalist-button">
+                <Link to="/contact" className="brutalist-button">
                   START YOUR PROJECT
-                </button>
-                <button className="px-8 py-3 border-2 border-gray-800 dark:border-gray-200 text-gray-800 dark:text-gray-200 hover:bg-gray-800 hover:text-white dark:hover:bg-gray-200 dark:hover:text-gray-800 transition-colors">
-                  VIEW OUR WORK
-                </button>
+                </Link>
+
               </div>
             </div>
           </div>
