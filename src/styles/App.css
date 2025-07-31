@@ -266,6 +266,36 @@ body {
   }
 }
 
+@media (prefers-color-scheme: dark) {
+  .brutalist-container {
+    background: #1a1a1a;
+    border-color: #333;
+    color: white;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .site-header {
+    background-color: #121212;
+    border-bottom: 1px solid #333;
+    color: #f0f0f0;
+  }
+
+  .site-header a {
+    color: #f0f0f0;
+  }
+
+  .site-header a:hover {
+    color: var(--cyber-green);
+  }
+
+  .logo img {
+    filter: brightness(0) invert(1); /* If logo is dark, invert it */
+  }
+}
+
+
+
 /* Responsive Typography */
 @media (max-width: 768px) {
   h1 {
