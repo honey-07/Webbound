@@ -202,9 +202,70 @@ const serviceItems = [
 </header>
 
 <script>
-  // Header scroll effect
+  // Initialize state variables
   let isScrolled = false;
+  let isMenuOpen = false;
+  let isServicesOpen = false;
+  let isMobileServicesOpen = false;
 
+  // Initialize all menus to closed state on page load
+  function initializeMenus() {
+    const mobileMenu = document.querySelector(".mobile-menu") as HTMLElement;
+    const overlay = document.querySelector(".mobile-overlay") as HTMLElement;
+    const servicesMenu = document.querySelector(
+      ".services-menu"
+    ) as HTMLElement;
+    const mobileServicesMenu = document.querySelector(
+      ".mobile-services-menu"
+    ) as HTMLElement;
+    const servicesArrow = document.querySelector(
+      ".services-arrow"
+    ) as HTMLElement;
+    const mobileServicesArrow = document.querySelector(
+      ".mobile-services-arrow"
+    ) as HTMLElement;
+    const menuOpen = document.querySelector(".menu-open") as HTMLElement;
+    const menuClose = document.querySelector(".menu-close") as HTMLElement;
+
+    // Ensure mobile menu is hidden
+    if (mobileMenu) {
+      mobileMenu.style.transform = "translateY(-100%)";
+      mobileMenu.style.opacity = "0";
+    }
+
+    // Ensure overlay is hidden
+    if (overlay) {
+      overlay.style.opacity = "0";
+      overlay.style.visibility = "hidden";
+    }
+
+    // Ensure desktop services menu is hidden
+    if (servicesMenu) {
+      servicesMenu.style.opacity = "0";
+      servicesMenu.style.visibility = "hidden";
+    }
+
+    // Ensure mobile services menu is collapsed
+    if (mobileServicesMenu) {
+      mobileServicesMenu.style.maxHeight = "0";
+    }
+
+    // Reset arrow rotations
+    if (servicesArrow) {
+      servicesArrow.style.transform = "rotate(0deg)";
+    }
+    if (mobileServicesArrow) {
+      mobileServicesArrow.style.transform = "rotate(0deg)";
+    }
+
+    // Ensure correct menu icons are shown
+    if (menuOpen && menuClose) {
+      menuOpen.classList.remove("hidden");
+      menuClose.classList.add("hidden");
+    }
+  }
+
+  // Header scroll effect
   function handleScroll() {
     const scrolled = window.scrollY > 20;
     if (scrolled !== isScrolled) {
@@ -220,13 +281,7 @@ const serviceItems = [
     }
   }
 
-  window.addEventListener("scroll", handleScroll);
-
-  // Mobile menu toggle
-  let isMenuOpen = false;
-  let isServicesOpen = false;
-  let isMobileServicesOpen = false;
-
+  // Close all menus function
   function closeAllMenus() {
     isMenuOpen = false;
     isServicesOpen = false;
@@ -276,141 +331,156 @@ const serviceItems = [
     }
   }
 
-  // Mobile menu toggle
-  const mobileMenuToggle = document.querySelector(
-    ".mobile-menu-toggle"
-  ) as HTMLElement;
-  if (mobileMenuToggle) {
-    mobileMenuToggle.addEventListener("click", () => {
-      isMenuOpen = !isMenuOpen;
-      const mobileMenu = document.querySelector(".mobile-menu") as HTMLElement;
-      const overlay = document.querySelector(".mobile-overlay") as HTMLElement;
-      const menuOpen = document.querySelector(".menu-open") as HTMLElement;
-      const menuClose = document.querySelector(".menu-close") as HTMLElement;
+  // Initialize everything when DOM is loaded
+  document.addEventListener("DOMContentLoaded", function () {
+    initializeMenus();
 
-      if (isMenuOpen) {
-        if (mobileMenu) {
-          mobileMenu.style.transform = "translateY(0)";
-          mobileMenu.style.opacity = "1";
-        }
-        if (overlay) {
-          overlay.style.opacity = "1";
-          overlay.style.visibility = "visible";
-        }
-        if (menuOpen && menuClose) {
-          menuOpen.classList.add("hidden");
-          menuClose.classList.remove("hidden");
-        }
-      } else {
-        closeAllMenus();
-      }
-    });
-  }
+    // Add scroll event listener
+    window.addEventListener("scroll", handleScroll);
 
-  // Mobile menu close button
-  const mobileMenuClose = document.querySelector(
-    ".mobile-menu-close"
-  ) as HTMLElement;
-  if (mobileMenuClose) {
-    mobileMenuClose.addEventListener("click", closeAllMenus);
-  }
-
-  // Desktop services dropdown
-  const servicesDropdown = document.querySelector(
-    ".services-dropdown"
-  ) as HTMLElement;
-  if (servicesDropdown) {
-    const servicesTrigger = servicesDropdown.querySelector(
-      ".services-trigger"
+    // Mobile menu toggle
+    const mobileMenuToggle = document.querySelector(
+      ".mobile-menu-toggle"
     ) as HTMLElement;
-    const servicesMenu = servicesDropdown.querySelector(
-      ".services-menu"
-    ) as HTMLElement;
-    const servicesArrow = servicesDropdown.querySelector(
-      ".services-arrow"
-    ) as HTMLElement;
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener("click", () => {
+        isMenuOpen = !isMenuOpen;
+        const mobileMenu = document.querySelector(
+          ".mobile-menu"
+        ) as HTMLElement;
+        const overlay = document.querySelector(
+          ".mobile-overlay"
+        ) as HTMLElement;
+        const menuOpen = document.querySelector(".menu-open") as HTMLElement;
+        const menuClose = document.querySelector(".menu-close") as HTMLElement;
 
-    if (servicesTrigger) {
-      servicesTrigger.addEventListener("click", () => {
-        isServicesOpen = !isServicesOpen;
-        if (servicesMenu && servicesArrow) {
-          if (isServicesOpen) {
-            servicesMenu.style.opacity = "1";
-            servicesMenu.style.visibility = "visible";
-            servicesArrow.style.transform = "rotate(180deg)";
-          } else {
-            servicesMenu.style.opacity = "0";
-            servicesMenu.style.visibility = "hidden";
-            servicesArrow.style.transform = "rotate(0deg)";
+        if (isMenuOpen) {
+          if (mobileMenu) {
+            mobileMenu.style.transform = "translateY(0)";
+            mobileMenu.style.opacity = "1";
           }
+          if (overlay) {
+            overlay.style.opacity = "1";
+            overlay.style.visibility = "visible";
+          }
+          if (menuOpen && menuClose) {
+            menuOpen.classList.add("hidden");
+            menuClose.classList.remove("hidden");
+          }
+        } else {
+          closeAllMenus();
         }
       });
     }
-  }
 
-  // Mobile services dropdown
-  const mobileServicesTrigger = document.querySelector(
-    ".mobile-services-trigger"
-  ) as HTMLElement;
-  if (mobileServicesTrigger) {
-    mobileServicesTrigger.addEventListener("click", () => {
-      isMobileServicesOpen = !isMobileServicesOpen;
-      const mobileServicesMenu = document.querySelector(
-        ".mobile-services-menu"
-      ) as HTMLElement;
-      const mobileServicesArrow = document.querySelector(
-        ".mobile-services-arrow"
-      ) as HTMLElement;
+    // Mobile menu close button
+    const mobileMenuClose = document.querySelector(
+      ".mobile-menu-close"
+    ) as HTMLElement;
+    if (mobileMenuClose) {
+      mobileMenuClose.addEventListener("click", closeAllMenus);
+    }
 
-      if (mobileServicesMenu && mobileServicesArrow) {
-        if (isMobileServicesOpen) {
-          mobileServicesMenu.style.maxHeight = `${mobileServicesMenu.scrollHeight}px`;
-          mobileServicesArrow.style.transform = "rotate(180deg)";
-        } else {
-          mobileServicesMenu.style.maxHeight = "0";
-          mobileServicesArrow.style.transform = "rotate(0deg)";
-        }
-      }
-    });
-  }
-
-  // Close menus when clicking on overlay
-  const overlay = document.querySelector(".mobile-overlay") as HTMLElement;
-  if (overlay) {
-    overlay.addEventListener("click", closeAllMenus);
-  }
-
-  // Close menus when clicking on nav links
-  const mobileNavLinks = document.querySelectorAll(
-    ".mobile-nav-link, .mobile-service-link"
-  ) as NodeListOf<HTMLElement>;
-  mobileNavLinks.forEach((link) => {
-    link.addEventListener("click", closeAllMenus);
-  });
-
-  // Close desktop services menu when clicking outside
-  document.addEventListener("click", (e) => {
+    // Desktop services dropdown
     const servicesDropdown = document.querySelector(
       ".services-dropdown"
     ) as HTMLElement;
-    if (
-      servicesDropdown &&
-      !servicesDropdown.contains(e.target as Node) &&
-      isServicesOpen
-    ) {
-      isServicesOpen = false;
+    if (servicesDropdown) {
+      const servicesTrigger = servicesDropdown.querySelector(
+        ".services-trigger"
+      ) as HTMLElement;
       const servicesMenu = servicesDropdown.querySelector(
         ".services-menu"
       ) as HTMLElement;
       const servicesArrow = servicesDropdown.querySelector(
         ".services-arrow"
       ) as HTMLElement;
-      if (servicesMenu && servicesArrow) {
-        servicesMenu.style.opacity = "0";
-        servicesMenu.style.visibility = "hidden";
-        servicesArrow.style.transform = "rotate(0deg)";
+
+      if (servicesTrigger) {
+        servicesTrigger.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          isServicesOpen = !isServicesOpen;
+          if (servicesMenu && servicesArrow) {
+            if (isServicesOpen) {
+              servicesMenu.style.opacity = "1";
+              servicesMenu.style.visibility = "visible";
+              servicesArrow.style.transform = "rotate(180deg)";
+            } else {
+              servicesMenu.style.opacity = "0";
+              servicesMenu.style.visibility = "hidden";
+              servicesArrow.style.transform = "rotate(0deg)";
+            }
+          }
+        });
       }
     }
+
+    // Mobile services dropdown
+    const mobileServicesTrigger = document.querySelector(
+      ".mobile-services-trigger"
+    ) as HTMLElement;
+    if (mobileServicesTrigger) {
+      mobileServicesTrigger.addEventListener("click", () => {
+        isMobileServicesOpen = !isMobileServicesOpen;
+        const mobileServicesMenu = document.querySelector(
+          ".mobile-services-menu"
+        ) as HTMLElement;
+        const mobileServicesArrow = document.querySelector(
+          ".mobile-services-arrow"
+        ) as HTMLElement;
+
+        if (mobileServicesMenu && mobileServicesArrow) {
+          if (isMobileServicesOpen) {
+            mobileServicesMenu.style.maxHeight = `${mobileServicesMenu.scrollHeight}px`;
+            mobileServicesArrow.style.transform = "rotate(180deg)";
+          } else {
+            mobileServicesMenu.style.maxHeight = "0";
+            mobileServicesArrow.style.transform = "rotate(0deg)";
+          }
+        }
+      });
+    }
+
+    // Close menus when clicking on overlay
+    const overlay = document.querySelector(".mobile-overlay") as HTMLElement;
+    if (overlay) {
+      overlay.addEventListener("click", closeAllMenus);
+    }
+
+    // Close menus when clicking on nav links
+    const mobileNavLinks = document.querySelectorAll(
+      ".mobile-nav-link, .mobile-service-link"
+    ) as NodeListOf<HTMLElement>;
+    mobileNavLinks.forEach((link) => {
+      link.addEventListener("click", closeAllMenus);
+    });
+
+    // Close desktop services menu when clicking outside
+    document.addEventListener("click", (e) => {
+      const servicesDropdown = document.querySelector(
+        ".services-dropdown"
+      ) as HTMLElement;
+      if (
+        servicesDropdown &&
+        !servicesDropdown.contains(e.target as Node) &&
+        isServicesOpen
+      ) {
+        isServicesOpen = false;
+        const servicesMenu = servicesDropdown.querySelector(
+          ".services-menu"
+        ) as HTMLElement;
+        const servicesArrow = servicesDropdown.querySelector(
+          ".services-arrow"
+        ) as HTMLElement;
+        if (servicesMenu && servicesArrow) {
+          servicesMenu.style.opacity = "0";
+          servicesMenu.style.visibility = "hidden";
+          servicesArrow.style.transform = "rotate(0deg)";
+        }
+      }
+    });
   });
 </script>
 
