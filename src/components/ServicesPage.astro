@@ -1,24 +1,32 @@
 ---
-import { icons } from "lucide";
+import {
+  Code,
+  Smartphone,
+  Monitor,
+  MessageSquare,
+  Brain,
+  ShoppingCart,
+  Server,
+  TrendingUp,
+  ArrowLeft,
+  CheckCircle,
+} from "lucide-astro";
 import { services } from "../data/services";
-import { serviceMetadata } from "../data/metadata.config";
-import { AstroComponentFactory } from "astro";
 
-const iconMap = {
-  code: icons.code,
-  smartphone: icons.smartphone,
-  monitor: icons.monitor,
-  message_square: icons.message_square,
-  brain: icons.brain,
-  shopping_cart: icons.shopping_cart,
-  server: icons.server,
-  trending_up: icons.trending_up,
+const iconMap: Record<string, any> = {
+  code: Code,
+  smartphone: Smartphone,
+  monitor: Monitor,
+  message_square: MessageSquare,
+  brain: Brain,
+  shopping_cart: ShoppingCart,
+  server: Server,
+  trending_up: TrendingUp,
 };
 
 const { serviceId } = Astro.params;
 const service = services.find((s) => s.id === serviceId);
-const CheckCircle = icons.check_circle;
-const ArrowLeft = icons.arrow_left;
+const IconComponent = service ? iconMap[service.icon] : null;
 ---
 
 {
@@ -40,7 +48,7 @@ const ArrowLeft = icons.arrow_left;
           href="/"
           class="inline-flex items-center text-blue-500 hover:text-blue-600 mb-8"
         >
-          <svg class="w-4 h-4 mr-2" innerHTML={ArrowLeft} />
+          <component is={ArrowLeft} class="w-4 h-4 mr-2" />
           Back to Home
         </a>
 
@@ -49,7 +57,9 @@ const ArrowLeft = icons.arrow_left;
             <div
               class={`inline-flex items-center justify-center w-16 h-16 rounded-lg bg-gradient-to-br ${service.color} text-white mb-6`}
             >
-              <svg class="w-8 h-8" innerHTML={iconMap[service.icon]} />
+              {IconComponent && (
+                <component is={IconComponent} class="w-8 h-8" />
+              )}
             </div>
             <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
               {service.title}
@@ -80,13 +90,10 @@ const ArrowLeft = icons.arrow_left;
             </h3>
             <ul class="space-y-2">
               {service.features.map((feature, index) => (
-                <li
-                  class="flex items-center text-gray-600 dark:text-gray-400"
-                  key={index}
-                >
-                  <svg
+                <li class="flex items-center text-gray-600 dark:text-gray-400">
+                  <component
+                    is={CheckCircle}
                     class="w-4 h-4 text-green-500 mr-3 flex-shrink-0"
-                    innerHTML={CheckCircle}
                   />
                   {feature}
                 </li>
@@ -100,10 +107,7 @@ const ArrowLeft = icons.arrow_left;
             </h3>
             <div class="flex flex-wrap gap-2">
               {service.technologies.map((tech, index) => (
-                <span
-                  key={index}
-                  class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm"
-                >
+                <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm">
                   {tech}
                 </span>
               ))}
@@ -116,13 +120,10 @@ const ArrowLeft = icons.arrow_left;
             </h3>
             <ul class="space-y-2">
               {service.benefits.map((benefit, index) => (
-                <li
-                  key={index}
-                  class="flex items-center text-gray-600 dark:text-gray-400"
-                >
-                  <svg
+                <li class="flex items-center text-gray-600 dark:text-gray-400">
+                  <component
+                    is={CheckCircle}
                     class="w-4 h-4 text-blue-500 mr-3 flex-shrink-0"
-                    innerHTML={CheckCircle}
                   />
                   {benefit}
                 </li>
@@ -137,7 +138,7 @@ const ArrowLeft = icons.arrow_left;
           </h3>
           <div class="grid md:grid-cols-5 gap-6">
             {service.process.map((step, index) => (
-              <div key={index} class="text-center">
+              <div class="text-center">
                 <div class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold">
                   {index + 1}
                 </div>

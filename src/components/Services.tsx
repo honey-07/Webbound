@@ -1,7 +1,17 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Code, Smartphone, Monitor, MessageSquare, Brain, ShoppingCart, Server, TrendingUp } from 'lucide-react';
-import { services } from '../data/services';
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  Code,
+  Smartphone,
+  Monitor,
+  MessageSquare,
+  Brain,
+  ShoppingCart,
+  Server,
+  TrendingUp,
+} from "lucide-react";
+import { services } from "../data/services";
 
 const iconMap = {
   Code,
@@ -23,14 +33,15 @@ const Services: React.FC = () => {
             OUR <span className="gradient-text">SERVICES</span>
           </h2>
           <p className="text-lg lg:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Comprehensive technology solutions designed to transform your business and accelerate growth
+            Comprehensive technology solutions designed to transform your
+            business and accelerate growth
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
           {services.map((service, index) => {
             const IconComponent = iconMap[service.icon as keyof typeof iconMap];
-            
+
             return (
               <div
                 key={service.id}
@@ -41,13 +52,20 @@ const Services: React.FC = () => {
                   <div className="w-10 h-10 lg:w-12 lg:h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
                     <IconComponent className="w-6 h-6" />
                   </div>
-                  <h3 className="text-lg lg:text-xl font-bold mb-2">{service.title}</h3>
-                  <p className="text-white/90 text-sm leading-relaxed">{service.description}</p>
+                  <h3 className="text-lg lg:text-xl font-bold mb-2">
+                    {service.title}
+                  </h3>
+                  <p className="text-white/90 text-sm leading-relaxed">
+                    {service.description}
+                  </p>
                 </div>
 
                 <div className="space-y-2 mb-6">
                   {service.features.slice(0, 3).map((feature, idx) => (
-                    <div key={idx} className="flex items-center text-sm text-white/80">
+                    <div
+                      key={idx}
+                      className="flex items-center text-sm text-white/80"
+                    >
                       <div className="w-1.5 h-1.5 bg-white/60 rounded-full mr-2"></div>
                       {feature}
                     </div>
@@ -72,9 +90,14 @@ const Services: React.FC = () => {
               READY TO START YOUR PROJECT?
             </h3>
             <p className="text-sm lg:text-base text-gray-600 dark:text-gray-400 mb-6">
-              Let's discuss how we can transform your ideas into digital reality.
+              Let's discuss how we can transform your ideas into digital
+              reality.
             </p>
-            <a href='https://calendly.com/webbound/30min' target='_blank' className="brutalist-button">
+            <a
+              href="https://calendly.com/webbound/30min"
+              target="_blank"
+              className="brutalist-button"
+            >
               GET FREE CONSULTATION
             </a>
           </div>

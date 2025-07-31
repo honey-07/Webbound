@@ -9,7 +9,7 @@ import {
   ShoppingCart,
   Server,
   TrendingUp,
-} from "lucide";
+} from "lucide-react"; // Changed from "lucide" to "lucide-react"
 import { services } from "../data/services.ts";
 
 const iconMap = {
@@ -53,11 +53,8 @@ const iconMap = {
             >
               <div class="mb-4">
                 <div class="w-10 h-10 lg:w-12 lg:h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
-                  {IconComponent ? (
-                    <component is={IconComponent} class="w-6 h-6" />
-                  ) : (
-                    <div class="text-xs">No Icon</div>
-                  )}
+                  {IconComponent && <IconComponent className="w-6 h-6" />}
+                  {!IconComponent && <div class="text-xs">No Icon</div>}
                 </div>
                 <h3 class="text-lg lg:text-xl font-bold mb-2">
                   {service.title}
@@ -84,7 +81,7 @@ const iconMap = {
                 class="inline-flex items-center text-white font-medium hover:text-white/80 transition-colors text-sm lg:text-base"
               >
                 Learn More
-                <component is={ArrowRight} class="w-4 h-4 ml-1" />
+                <ArrowRight className="w-4 h-4 ml-1" />
               </a>
             </div>
           );

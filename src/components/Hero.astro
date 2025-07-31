@@ -1,5 +1,5 @@
 ---
-import { ArrowRight, Zap, Code, Globe } from "lucide-astro";
+import { ArrowRight, Play, Zap, Code, Globe } from "lucide-astro";
 ---
 
 <section
@@ -12,11 +12,13 @@ import { ArrowRight, Zap, Code, Globe } from "lucide-astro";
     >
     </div>
     <div
-      class="organic-shape w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64 top-24 md:top-32 lg:top-40 right-12 md:right-16 lg:right-24 xl:right-32 bg-gradient-to-r from-green-400/20 to-blue-500/20 animate-delay-5000"
+      class="organic-shape w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 xl:w-64 xl:h-64 top-24 md:top-32 lg:top-40 right-12 md:right-16 lg:right-24 xl:right-32 bg-gradient-to-r from-green-400/20 to-blue-500/20"
+      style="animation-delay: 5s;"
     >
     </div>
     <div
-      class="organic-shape w-44 h-44 md:w-56 md:h-56 lg:w-72 lg:h-72 xl:w-80 xl:h-80 bottom-8 md:bottom-12 lg:bottom-16 xl:bottom-20 left-12 md:left-20 lg:left-32 xl:left-40 bg-gradient-to-r from-orange-500/20 to-pink-500/20 animate-delay-10000"
+      class="organic-shape w-44 h-44 md:w-56 md:h-56 lg:w-72 lg:h-72 xl:w-80 xl:h-80 bottom-8 md:bottom-12 lg:bottom-16 xl:bottom-20 left-12 md:left-20 lg:left-32 xl:left-40 bg-gradient-to-r from-orange-500/20 to-pink-500/20"
+      style="animation-delay: 10s;"
     >
     </div>
   </div>
@@ -152,24 +154,45 @@ import { ArrowRight, Zap, Code, Globe } from "lucide-astro";
           </div>
 
           <div
-            class="floating-element absolute -top-2 -right-2 md:-top-3 md:-right-3 lg:-top-4 lg:-right-4 w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center"
+            class="absolute w-full left-1/2 transform -translate-x-1/2 -bottom-12 flex justify-center gap-6"
           >
-            <Zap class="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-white" />
-          </div>
-
-          <div
-            class="floating-element absolute -bottom-2 -left-2 md:-bottom-3 md:-left-3 lg:-bottom-4 lg:-left-4 w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center animate-delay-2000"
-          >
-            <Code class="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-white" />
-          </div>
-
-          <div
-            class="floating-element absolute top-1/2 -right-3 md:-right-4 lg:-right-6 xl:-right-8 w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-gradient-to-r from-orange-500 to-pink-500 rounded-full flex items-center justify-center animate-delay-4000"
-          >
-            <Globe class="w-4 h-4 md:w-5 md:h-5 lg:w-6 lg:h-6 text-white" />
+            <!-- Use translate-x/translate-y or margin classes to adjust these -->
+            <div
+              class="floating-element w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center"
+            >
+              <Zap class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
+            </div>
+            <div
+              class="floating-element w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center"
+              style="animation-delay: 2s;"
+            >
+              <Code class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
+            </div>
+            <div
+              class="floating-element w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-gradient-to-r from-orange-500 to-pink-500 rounded-full flex items-center justify-center"
+              style="animation-delay: 4s;"
+            >
+              <Globe class="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<script is:client="load">
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("revealed");
+        }
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  const elements = document.querySelectorAll(".scroll-reveal");
+  elements.forEach((el) => observer.observe(el));
+</script>
