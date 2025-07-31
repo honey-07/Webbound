@@ -1,0 +1,108 @@
+---
+export interface Props {
+  options: string[];
+  value?: string;
+  placeholder?: string;
+  label: string;
+  name: string;
+  required?: boolean;
+  id?: string;
+}
+
+const {
+  options,
+  value = "",
+  placeholder = "Select an option",
+  label,
+  name,
+  required = false,
+  id = name,
+} = Astro.props;
+---
+
+<div class="relative">
+  <label
+    for={id}
+    class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+  >
+    {label}
+    {required && "*"}
+  </label>
+
+  <select
+    id={id}
+    name={name}
+    required={required}
+    class="w-full px-4 py-3 border-2 border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors appearance-none cursor-pointer"
+  >
+    {
+      !value && (
+        <option
+          value=""
+          disabled
+          selected
+          class="text-gray-500 dark:text-gray-400"
+        >
+          {placeholder}
+        </option>
+      )
+    }
+    {
+      options.map((option) => (
+        <option
+          value={option}
+          selected={value === option}
+          class="text-gray-900 dark:text-white bg-white dark:bg-gray-700"
+        >
+          {option}
+        </option>
+      ))
+    }
+  </select>
+
+  <!-- Custom chevron icon -->
+  <div
+    class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none mt-8"
+  >
+    <svg
+      class="w-5 h-5 text-gray-400"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="m19 9-7 7-7-7"></path>
+    </svg>
+  </div>
+</div>
+
+<style>
+  /* Hide the default select arrow */
+  select {
+    background-image: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
+
+  /* Ensure the custom arrow is positioned correctly */
+  select::-ms-expand {
+    display: none;
+  }
+
+  /* Style the select options for better contrast */
+  select option {
+    background-color: white;
+    color: black;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    select option {
+      background-color: rgb(55, 65, 81);
+      color: white;
+    }
+  }
+</style>

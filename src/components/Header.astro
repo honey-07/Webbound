@@ -1,0 +1,435 @@
+---
+import { Menu, X, Moon, Sun, Code, Zap, ChevronDown } from "lucide-react";
+import Logo from "../assets/logo.webp";
+
+const navItems = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Contact", href: "/contact" },
+  { name: "Careers", href: "/careers" },
+];
+
+const serviceItems = [
+  { name: "Web Development", href: "/services/web-development" },
+  { name: "Mobile Apps", href: "/services/mobile-development" },
+  { name: "Desktop Apps", href: "/services/desktop-development" },
+  { name: "WhatsApp Solutions", href: "/services/whatsapp-solutions" },
+  { name: "AI & ML", href: "/services/ai-ml-solutions" },
+  { name: "E-commerce", href: "/services/ecommerce-development" },
+  { name: "IT Solutions", href: "/services/custom-it-solutions" },
+  { name: "Digital Marketing", href: "/services/digital-marketing" },
+];
+---
+
+<header class="fixed w-full top-0 z-50 transition-all duration-300 header-bg">
+  <div class="container mx-auto px-4 py-3 lg:py-4">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <a href="/" class="flex items-center space-x-2 lg:space-x-3 group">
+        <div class="relative">
+          <div
+            class="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform"
+          >
+            <img src={Logo.src} alt="Webbound logo" class="rounded-lg" />
+          </div>
+        </div>
+        <div class="hidden sm:block">
+          <h1
+            class="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white"
+          >
+            WEBBOUND<span class="text-blue-500">.DEV</span>
+          </h1>
+          <p
+            class="text-xs text-gray-600 dark:text-gray-400 font-mono hidden lg:block"
+          >
+            TRANSFORMING IDEAS INTO DIGITAL REALITY
+          </p>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center space-x-6 xl:space-x-8">
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class="relative text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium text-sm uppercase tracking-wider group"
+            >
+              {item.name}
+              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover:w-full" />
+            </a>
+          ))
+        }
+
+        <!-- Services Dropdown -->
+        <div class="relative services-dropdown">
+          <button
+            class="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium text-sm uppercase tracking-wider services-trigger"
+          >
+            <span>Services</span>
+            <ChevronDown
+              className="w-4 h-4 transition-transform services-arrow"
+            />
+          </button>
+
+          <div
+            class="absolute top-full right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-xl border border-gray-200 dark:border-gray-700 py-2 z-50 services-menu opacity-0 invisible transition-all duration-200"
+          >
+            {
+              serviceItems.map((service) => (
+                <a
+                  href={service.href}
+                  class="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
+                >
+                  {service.name}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </nav>
+
+      <!-- Right Side Actions -->
+      <div class="flex items-center space-x-2 lg:space-x-4">
+        <a
+          href="/contact"
+          class="brutalist-button hidden md:block text-xs lg:text-sm px-4 py-2 lg:px-6 lg:py-3"
+        >
+          START PROJECT
+        </a>
+
+        <button
+          class="lg:hidden p-2 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors mobile-menu-toggle"
+          aria-label="Toggle menu"
+        >
+          <Menu
+            className="w-5 h-5 text-gray-600 dark:text-gray-300 menu-open"
+          />
+          <X
+            className="w-5 h-5 text-gray-600 dark:text-gray-300 menu-close hidden"
+          />
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      class="lg:hidden absolute top-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg max-h-screen overflow-y-auto z-50 mobile-menu translate-y-[-100%] opacity-0 transition-all duration-300"
+    >
+      <!-- Mobile Menu Header -->
+      <div class="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center"
+            >
+              <img
+                src={Logo.src}
+                alt="Webbound logo"
+                class="rounded-lg w-8 h-8"
+              />
+            </div>
+            <div>
+              <h2 class="text-xl font-bold text-white">
+                WEBBOUND<span class="text-blue-200">.DEV</span>
+              </h2>
+              <p class="text-white/80 text-xs font-mono">DIGITAL SOLUTIONS</p>
+            </div>
+          </div>
+          <button
+            class="p-2 rounded-lg flex justify-center items-center bg-white/10 hover:bg-white/20 transition-colors mobile-menu-close"
+            aria-label="Close menu"
+          >
+            <X className="w-5 h-5 text-white" />
+          </button>
+        </div>
+      </div>
+
+      <nav class="px-4 py-4">
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class="block py-3 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium text-sm uppercase tracking-wider border-b border-gray-100 dark:border-gray-800 last:border-b-0 mobile-nav-link"
+            >
+              {item.name}
+            </a>
+          ))
+        }
+
+        <!-- Mobile Services Section -->
+        <div class="border-b border-gray-100 dark:border-gray-800">
+          <button
+            class="flex items-center justify-between w-full py-3 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium text-sm uppercase tracking-wider mobile-services-trigger"
+          >
+            <span>Services</span>
+            <ChevronDown
+              className="w-4 h-4 transition-transform mobile-services-arrow"
+            />
+          </button>
+
+          <div
+            class="pb-2 mobile-services-menu max-h-0 overflow-hidden transition-all duration-300"
+          >
+            {
+              serviceItems.map((service) => (
+                <a
+                  href={service.href}
+                  class="block py-2 pl-4 text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors text-sm mobile-service-link"
+                >
+                  {service.name}
+                </a>
+              ))
+            }
+          </div>
+        </div>
+
+        <a
+          href="/contact"
+          class="brutalist-button w-full mt-4 text-center mobile-nav-link"
+        >
+          START PROJECT
+        </a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Overlay for mobile menu -->
+  <div
+    class="fixed inset-0 bg-black/20 backdrop-blur-sm z-30 lg:hidden mobile-overlay opacity-0 invisible transition-all duration-300"
+  >
+  </div>
+</header>
+
+<script>
+  // Header scroll effect
+  let isScrolled = false;
+
+  function handleScroll() {
+    const scrolled = window.scrollY > 20;
+    if (scrolled !== isScrolled) {
+      isScrolled = scrolled;
+      const header = document.querySelector("header") as HTMLElement;
+      if (header) {
+        if (isScrolled) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      }
+    }
+  }
+
+  window.addEventListener("scroll", handleScroll);
+
+  // Mobile menu toggle
+  let isMenuOpen = false;
+  let isServicesOpen = false;
+  let isMobileServicesOpen = false;
+
+  function closeAllMenus() {
+    isMenuOpen = false;
+    isServicesOpen = false;
+    isMobileServicesOpen = false;
+
+    const mobileMenu = document.querySelector(".mobile-menu") as HTMLElement;
+    const overlay = document.querySelector(".mobile-overlay") as HTMLElement;
+    const servicesMenu = document.querySelector(
+      ".services-menu"
+    ) as HTMLElement;
+    const mobileServicesMenu = document.querySelector(
+      ".mobile-services-menu"
+    ) as HTMLElement;
+    const servicesArrow = document.querySelector(
+      ".services-arrow"
+    ) as HTMLElement;
+    const mobileServicesArrow = document.querySelector(
+      ".mobile-services-arrow"
+    ) as HTMLElement;
+    const menuOpen = document.querySelector(".menu-open") as HTMLElement;
+    const menuClose = document.querySelector(".menu-close") as HTMLElement;
+
+    if (mobileMenu) {
+      mobileMenu.style.transform = "translateY(-100%)";
+      mobileMenu.style.opacity = "0";
+    }
+    if (overlay) {
+      overlay.style.opacity = "0";
+      overlay.style.visibility = "hidden";
+    }
+    if (servicesMenu) {
+      servicesMenu.style.opacity = "0";
+      servicesMenu.style.visibility = "hidden";
+    }
+    if (mobileServicesMenu) {
+      mobileServicesMenu.style.maxHeight = "0";
+    }
+    if (servicesArrow) {
+      servicesArrow.style.transform = "rotate(0deg)";
+    }
+    if (mobileServicesArrow) {
+      mobileServicesArrow.style.transform = "rotate(0deg)";
+    }
+    if (menuOpen && menuClose) {
+      menuOpen.classList.remove("hidden");
+      menuClose.classList.add("hidden");
+    }
+  }
+
+  // Mobile menu toggle
+  const mobileMenuToggle = document.querySelector(
+    ".mobile-menu-toggle"
+  ) as HTMLElement;
+  if (mobileMenuToggle) {
+    mobileMenuToggle.addEventListener("click", () => {
+      isMenuOpen = !isMenuOpen;
+      const mobileMenu = document.querySelector(".mobile-menu") as HTMLElement;
+      const overlay = document.querySelector(".mobile-overlay") as HTMLElement;
+      const menuOpen = document.querySelector(".menu-open") as HTMLElement;
+      const menuClose = document.querySelector(".menu-close") as HTMLElement;
+
+      if (isMenuOpen) {
+        if (mobileMenu) {
+          mobileMenu.style.transform = "translateY(0)";
+          mobileMenu.style.opacity = "1";
+        }
+        if (overlay) {
+          overlay.style.opacity = "1";
+          overlay.style.visibility = "visible";
+        }
+        if (menuOpen && menuClose) {
+          menuOpen.classList.add("hidden");
+          menuClose.classList.remove("hidden");
+        }
+      } else {
+        closeAllMenus();
+      }
+    });
+  }
+
+  // Mobile menu close button
+  const mobileMenuClose = document.querySelector(
+    ".mobile-menu-close"
+  ) as HTMLElement;
+  if (mobileMenuClose) {
+    mobileMenuClose.addEventListener("click", closeAllMenus);
+  }
+
+  // Desktop services dropdown
+  const servicesDropdown = document.querySelector(
+    ".services-dropdown"
+  ) as HTMLElement;
+  if (servicesDropdown) {
+    const servicesTrigger = servicesDropdown.querySelector(
+      ".services-trigger"
+    ) as HTMLElement;
+    const servicesMenu = servicesDropdown.querySelector(
+      ".services-menu"
+    ) as HTMLElement;
+    const servicesArrow = servicesDropdown.querySelector(
+      ".services-arrow"
+    ) as HTMLElement;
+
+    if (servicesTrigger) {
+      servicesTrigger.addEventListener("click", () => {
+        isServicesOpen = !isServicesOpen;
+        if (servicesMenu && servicesArrow) {
+          if (isServicesOpen) {
+            servicesMenu.style.opacity = "1";
+            servicesMenu.style.visibility = "visible";
+            servicesArrow.style.transform = "rotate(180deg)";
+          } else {
+            servicesMenu.style.opacity = "0";
+            servicesMenu.style.visibility = "hidden";
+            servicesArrow.style.transform = "rotate(0deg)";
+          }
+        }
+      });
+    }
+  }
+
+  // Mobile services dropdown
+  const mobileServicesTrigger = document.querySelector(
+    ".mobile-services-trigger"
+  ) as HTMLElement;
+  if (mobileServicesTrigger) {
+    mobileServicesTrigger.addEventListener("click", () => {
+      isMobileServicesOpen = !isMobileServicesOpen;
+      const mobileServicesMenu = document.querySelector(
+        ".mobile-services-menu"
+      ) as HTMLElement;
+      const mobileServicesArrow = document.querySelector(
+        ".mobile-services-arrow"
+      ) as HTMLElement;
+
+      if (mobileServicesMenu && mobileServicesArrow) {
+        if (isMobileServicesOpen) {
+          mobileServicesMenu.style.maxHeight = `${mobileServicesMenu.scrollHeight}px`;
+          mobileServicesArrow.style.transform = "rotate(180deg)";
+        } else {
+          mobileServicesMenu.style.maxHeight = "0";
+          mobileServicesArrow.style.transform = "rotate(0deg)";
+        }
+      }
+    });
+  }
+
+  // Close menus when clicking on overlay
+  const overlay = document.querySelector(".mobile-overlay") as HTMLElement;
+  if (overlay) {
+    overlay.addEventListener("click", closeAllMenus);
+  }
+
+  // Close menus when clicking on nav links
+  const mobileNavLinks = document.querySelectorAll(
+    ".mobile-nav-link, .mobile-service-link"
+  ) as NodeListOf<HTMLElement>;
+  mobileNavLinks.forEach((link) => {
+    link.addEventListener("click", closeAllMenus);
+  });
+
+  // Close desktop services menu when clicking outside
+  document.addEventListener("click", (e) => {
+    const servicesDropdown = document.querySelector(
+      ".services-dropdown"
+    ) as HTMLElement;
+    if (
+      servicesDropdown &&
+      !servicesDropdown.contains(e.target as Node) &&
+      isServicesOpen
+    ) {
+      isServicesOpen = false;
+      const servicesMenu = servicesDropdown.querySelector(
+        ".services-menu"
+      ) as HTMLElement;
+      const servicesArrow = servicesDropdown.querySelector(
+        ".services-arrow"
+      ) as HTMLElement;
+      if (servicesMenu && servicesArrow) {
+        servicesMenu.style.opacity = "0";
+        servicesMenu.style.visibility = "hidden";
+        servicesArrow.style.transform = "rotate(0deg)";
+      }
+    }
+  });
+</script>
+
+<style>
+  .header-bg {
+    background: transparent;
+  }
+
+  .header-bg.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(229, 231, 235, 1);
+    box-shadow:
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  .dark .header-bg.scrolled {
+    background: rgba(17, 24, 39, 0.95);
+    border-bottom-color: rgba(55, 65, 81, 1);
+  }
+</style>

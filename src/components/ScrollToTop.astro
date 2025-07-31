@@ -1,0 +1,41 @@
+---
+// src/components/SSRScrollReset.astro - Pure SSR approach
+// This runs entirely during build time and uses CSS for scroll management
+---
+
+<!-- SSR: Add scroll reset styles to <head> during build -->
+<style is:global>
+  /* SSR: These styles are inlined during build time */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Force scroll position reset on page load */
+  body {
+    /* This ensures consistent starting position across pages */
+    scroll-padding-top: 0;
+  }
+
+  /* Prevent scroll restoration conflicts */
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+</style>
+
+<!-- SSR: Meta tag to control scroll restoration -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- SSR: Inline critical JavaScript (minimal, runs once) -->
+<script is:inline>
+  // This runs immediately when HTML is parsed (SSR-friendly)
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
+  // Immediate scroll reset (no DOM wait needed)
+  if (typeof window !== "undefined") {
+    window.scrollTo(0, 0);
+  }
+</script>

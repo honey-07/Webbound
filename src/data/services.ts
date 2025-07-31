@@ -1,11 +1,11 @@
-import Website from "../assets/Website.webp"
-import Mobile from "../assets/Mobile.webp"
-import CustomIT from "../assets/CustomIT.webp"
-import Marketing from "../assets/Marketing.webp"
-import Whatsapp from "../assets/Whatsapp.webp"
-import Desktop from "../assets/Desktop.webp"
-import AI from "../assets/AI.webp"
-import Ecommerce from "../assets/Ecommerce.webp"
+import Website from "../assets/Website.webp";
+import Mobile from "../assets/Mobile.webp";
+import CustomIT from "../assets/CustomIT.webp";
+import Marketing from "../assets/Marketing.webp";
+import Whatsapp from "../assets/Whatsapp.webp";
+import Desktop from "../assets/Desktop.webp";
+import AI from "../assets/AI.webp";
+import Ecommerce from "../assets/Ecommerce.webp";
 
 export interface Service {
   id: string;
@@ -27,7 +27,7 @@ export const services: Service[] = [
     id: 'web-development',
     title: 'Web Development',
     description: 'Custom websites and web applications that drive results and deliver exceptional user experiences.',
-    icon: 'Code',
+    icon: 'code',
     color: 'from-blue-500 to-purple-600',
     features: [
       'Custom Website Development',
@@ -63,7 +63,7 @@ export const services: Service[] = [
     id: 'mobile-development',
     title: 'Mobile App Development',
     description: 'Native and cross-platform mobile applications that deliver powerful user experiences.',
-    icon: 'Smartphone',
+    icon: 'smartphone',
     color: 'from-green-400 to-blue-500',
     features: [
       'Native iOS Development',
@@ -99,7 +99,7 @@ export const services: Service[] = [
     id: 'desktop-development',
     title: 'Desktop Applications',
     description: 'Powerful desktop applications that streamline business operations and enhance productivity.',
-    icon: 'Monitor',
+    icon: 'monitor',
     color: 'from-purple-500 to-pink-500',
     features: [
       'Cross-platform Desktop Apps',
@@ -135,7 +135,7 @@ export const services: Service[] = [
     id: 'whatsapp-solutions',
     title: 'WhatsApp Business Solutions',
     description: 'WhatsApp Business API implementation for enhanced customer engagement and communication.',
-    icon: 'MessageSquare',
+    icon: 'message_square',
     color: 'from-green-500 to-teal-500',
     features: [
       'WhatsApp Business API Integration',
@@ -171,7 +171,7 @@ export const services: Service[] = [
     id: 'ai-ml-solutions',
     title: 'AI & Machine Learning',
     description: 'AI-powered automation and machine learning solutions that drive intelligent business decisions.',
-    icon: 'Brain',
+    icon: 'brain',
     color: 'from-orange-500 to-red-500',
     features: [
       'AI-Powered Automation',
@@ -207,7 +207,7 @@ export const services: Service[] = [
     id: 'ecommerce-development',
     title: 'E-commerce Development',
     description: 'Conversion-optimized online stores with seamless user experiences and robust functionality.',
-    icon: 'ShoppingCart',
+    icon: 'shopping_cart',
     color: 'from-teal-500 to-cyan-500',
     features: [
       'Custom E-commerce Platforms',
@@ -243,7 +243,7 @@ export const services: Service[] = [
     id: 'custom-it-solutions',
     title: 'Custom IT Solutions',
     description: 'Comprehensive IT solutions including cloud services, security, and DevOps implementation.',
-    icon: 'Server',
+    icon: 'server',
     color: 'from-indigo-500 to-purple-600',
     features: [
       'Cloud Solutions & Migration',
@@ -279,7 +279,7 @@ export const services: Service[] = [
     id: 'digital-marketing',
     title: 'Digital Marketing & SEO',
     description: 'Data-driven marketing strategies that deliver measurable results and business growth.',
-    icon: 'TrendingUp',
+    icon: 'trending_up',
     color: 'from-pink-500 to-rose-500',
     features: [
       'Search Engine Optimization',

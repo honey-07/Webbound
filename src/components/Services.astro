@@ -1,0 +1,117 @@
+---
+import {
+  ArrowRight,
+  Code,
+  Smartphone,
+  Monitor,
+  MessageSquare,
+  Brain,
+  ShoppingCart,
+  Server,
+  TrendingUp,
+} from "lucide";
+import { services } from "../data/services.ts";
+
+const iconMap = {
+  code: Code,
+  smartphone: Smartphone,
+  monitor: Monitor,
+  message_square: MessageSquare,
+  brain: Brain,
+  shopping_cart: ShoppingCart,
+  server: Server,
+  trending_up: TrendingUp,
+};
+---
+
+<section id="services" class="py-20 bg-white dark:bg-gray-900">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2
+        class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+      >
+        OUR <span class="gradient-text">SERVICES</span>
+      </h2>
+      <p
+        class="text-lg lg:text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto"
+      >
+        Comprehensive technology solutions designed to transform your business
+        and accelerate growth
+      </p>
+    </div>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8"
+    >
+      {
+        services.map((service, index) => {
+          const IconComponent = iconMap[service.icon];
+          return (
+            <div
+              class={`card-3d p-4 lg:p-6 rounded-lg bg-gradient-to-br ${service.color} text-white hover:shadow-xl transition-all duration-300`}
+              style={`animation-delay: ${index * 100}ms`}
+            >
+              <div class="mb-4">
+                <div class="w-10 h-10 lg:w-12 lg:h-12 bg-white/20 rounded-lg flex items-center justify-center mb-4">
+                  {IconComponent ? (
+                    <component is={IconComponent} class="w-6 h-6" />
+                  ) : (
+                    <div class="text-xs">No Icon</div>
+                  )}
+                </div>
+                <h3 class="text-lg lg:text-xl font-bold mb-2">
+                  {service.title}
+                </h3>
+                <p class="text-white/90 text-sm leading-relaxed">
+                  {service.description}
+                </p>
+              </div>
+
+              <div class="space-y-2 mb-6">
+                {service.features.slice(0, 3).map((feature, idx) => (
+                  <div
+                    class="flex items-center text-sm text-white/80"
+                    key={idx}
+                  >
+                    <div class="w-1.5 h-1.5 bg-white/60 rounded-full mr-2" />
+                    {feature}
+                  </div>
+                ))}
+              </div>
+
+              <a
+                href={`/services/${service.id}`}
+                class="inline-flex items-center text-white font-medium hover:text-white/80 transition-colors text-sm lg:text-base"
+              >
+                Learn More
+                <component is={ArrowRight} class="w-4 h-4 ml-1" />
+              </a>
+            </div>
+          );
+        })
+      }
+    </div>
+
+    <div class="text-center mt-16">
+      <div
+        class="brutalist-container inline-block p-8 bg-gray-50 dark:bg-gray-800"
+      >
+        <h3
+          class="text-xl lg:text-2xl font-bold text-gray-900 dark:text-white mb-4"
+        >
+          READY TO START YOUR PROJECT?
+        </h3>
+        <p class="text-sm lg:text-base text-gray-600 dark:text-gray-400 mb-6">
+          Let's discuss how we can transform your ideas into digital reality.
+        </p>
+        <a
+          href="https://calendly.com/webbound/30min"
+          target="_blank"
+          class="brutalist-button"
+        >
+          GET FREE CONSULTATION
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

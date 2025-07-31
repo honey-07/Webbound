@@ -1,0 +1,56 @@
+---
+// src/pages/index.astro
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import SEO from "../components/SEO.astro";
+import Hero from "../components/Hero.astro";
+import Services from "../components/Services.astro";
+import Testimonials from "../components/Testimonials.astro";
+
+import "../styles/index.css";
+
+const title = "Webbound.dev - TRANSFORMING IDEAS INTO DIGITAL REALITY";
+const description =
+  "We're a cutting-edge technology solutions company specializing in web development, mobile apps, AI integration, and custom IT solutions. Let's build the future together.";
+const keywords = [
+  "web development",
+  "mobile apps",
+  "AI solutions",
+  "custom IT",
+  "digital transformation",
+  "webbound",
+];
+const canonicalUrl = "/";
+const ogImage = "/og-image.png";
+const type = "website";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <SEO
+      title={title}
+      description={description}
+      keywords={keywords}
+      canonicalUrl={canonicalUrl}
+      ogImage={ogImage}
+      type={type}
+    />
+    <title>{title}</title>
+  </head>
+  <body class="bg-white text-gray-900 dark:bg-gray-900 dark:text-white">
+    <Header />
+    <main>
+      <Hero />
+      <Services />
+      <Testimonials />
+    </main>
+    <Footer />
+  </body>
+</html>
