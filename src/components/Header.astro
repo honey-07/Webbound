@@ -1,5 +1,5 @@
 ---
-import { Menu, X, Moon, Sun, Code, Zap, ChevronDown } from "lucide-astro";
+import { Menu, X, Moon, Sun, Code, Zap, ChevronDown } from "lucide-react";
 import Logo from "../assets/logo.webp";
 
 const navItems = [
@@ -22,7 +22,8 @@ const serviceItems = [
 ---
 
 <header
-  class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 header-bg"
+  class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-lg"
+  class="fixed w-full top-0 z-50 transition-all duration-300 header-bg"
 >
   <div class="container mx-auto px-4 py-3 lg:py-4">
     <div class="flex items-center justify-between">
@@ -63,7 +64,7 @@ const serviceItems = [
           ))
         }
 
-        <!-- Desktop Services Dropdown -->
+        <!-- Services Dropdown -->
         <div class="relative services-dropdown">
           <button
             class="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium text-sm uppercase tracking-wider services-trigger"
@@ -116,7 +117,7 @@ const serviceItems = [
 
     <!-- Mobile Menu -->
     <div
-      class="lg:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 shadow-lg max-h-screen overflow-y-auto z-50 mobile-menu transform -translate-y-full opacity-0 transition-all duration-300"
+      class="lg:hidden absolute top-0 left-0 right-0 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 shadow-lg max-h-screen overflow-y-auto z-50 mobile-menu translate-y-[-100%] opacity-0 transition-all duration-300"
     >
       <!-- Mobile Menu Header -->
       <div class="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-6">
@@ -152,7 +153,7 @@ const serviceItems = [
           navItems.map((item) => (
             <a
               href={item.href}
-              class="block py-3 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium text-sm uppercase tracking-wider border-b border-gray-100 dark:border-gray-800 mobile-nav-link"
+              class="block py-3 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium text-sm uppercase tracking-wider border-b border-gray-100 dark:border-gray-800 last:border-b-0 mobile-nav-link"
             >
               {item.name}
             </a>
@@ -162,19 +163,16 @@ const serviceItems = [
         <!-- Mobile Services Section -->
         <div class="border-b border-gray-100 dark:border-gray-800">
           <button
-            type="button"
-            class="flex items-center justify-between w-full py-3 text-left text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium text-sm uppercase tracking-wider mobile-services-btn"
-            data-mobile-services="trigger"
+            class="flex items-center justify-between w-full py-3 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium text-sm uppercase tracking-wider mobile-services-trigger"
           >
             <span>Services</span>
             <ChevronDown
-              className="w-4 h-4 transition-transform duration-300 mobile-services-chevron"
+              className="w-4 h-4 transition-transform mobile-services-arrow"
             />
           </button>
 
           <div
-            class="mobile-services-content hidden"
-            data-mobile-services="content"
+            class="pb-2 mobile-services-menu max-h-0 overflow-hidden transition-all duration-300"
           >
             {
               serviceItems.map((service) => (
@@ -207,265 +205,285 @@ const serviceItems = [
 </header>
 
 <script>
-  console.log("Header script loading...");
-
-  // State variables
+  // Initialize state variables
   let isScrolled = false;
   let isMenuOpen = false;
   let isServicesOpen = false;
   let isMobileServicesOpen = false;
 
-  // Initialize everything when DOM is loaded
-  document.addEventListener("DOMContentLoaded", function () {
-    console.log("DOM loaded, initializing header...");
+  // Initialize all menus to closed state on page load
+  function initializeMenus() {
+    const mobileMenu = document.querySelector(".mobile-menu") as HTMLElement;
+    const overlay = document.querySelector(".mobile-overlay") as HTMLElement;
+    const servicesMenu = document.querySelector(
+      ".services-menu"
+    ) as HTMLElement;
+    const mobileServicesMenu = document.querySelector(
+      ".mobile-services-menu"
+    ) as HTMLElement;
+    const servicesArrow = document.querySelector(
+      ".services-arrow"
+    ) as HTMLElement;
+    const mobileServicesArrow = document.querySelector(
+      ".mobile-services-arrow"
+    ) as HTMLElement;
+    const menuOpen = document.querySelector(".menu-open") as HTMLElement;
+    const menuClose = document.querySelector(".menu-close") as HTMLElement;
 
-    // Add scroll event listener
-    window.addEventListener("scroll", handleScroll);
+    // Ensure mobile menu is hidden
+    if (mobileMenu) {
+      mobileMenu.style.transform = "translateY(-100%)";
+      mobileMenu.style.opacity = "0";
+    }
 
-    // Initialize mobile menu toggle
-    setupMobileMenuToggle();
+    // Ensure overlay is hidden
+    if (overlay) {
+      overlay.style.opacity = "0";
+      overlay.style.visibility = "hidden";
+    }
 
-    // Initialize desktop services
-    setupDesktopServices();
+    // Ensure desktop services menu is hidden
+    if (servicesMenu) {
+      servicesMenu.style.opacity = "0";
+      servicesMenu.style.visibility = "hidden";
+    }
 
-    // Initialize mobile services
-    setupMobileServices();
+    // Ensure mobile services menu is collapsed
+    if (mobileServicesMenu) {
+      mobileServicesMenu.style.maxHeight = "0";
+    }
 
-    // Setup overlay and nav links
-    setupCloseHandlers();
+    // Reset arrow rotations
+    if (servicesArrow) {
+      servicesArrow.style.transform = "rotate(0deg)";
+    }
+    if (mobileServicesArrow) {
+      mobileServicesArrow.style.transform = "rotate(0deg)";
+    }
 
-    console.log("Header initialization complete");
-  });
+    // Ensure correct menu icons are shown
+    if (menuOpen && menuClose) {
+      menuOpen.classList.remove("hidden");
+      menuClose.classList.add("hidden");
+    }
+  }
 
+  // Header scroll effect
   function handleScroll() {
     const scrolled = window.scrollY > 20;
     if (scrolled !== isScrolled) {
       isScrolled = scrolled;
       const header = document.querySelector("header") as HTMLElement;
       if (header) {
-        header.classList.toggle("scrolled", isScrolled);
+        if (isScrolled) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
       }
     }
   }
 
-  function setupMobileMenuToggle() {
-    const toggle = document.querySelector(".mobile-menu-toggle") as HTMLElement;
-    const closeBtn = document.querySelector(
-      ".mobile-menu-close"
-    ) as HTMLElement;
-
-    if (toggle) {
-      toggle.addEventListener("click", toggleMobileMenu);
-    }
-
-    if (closeBtn) {
-      closeBtn.addEventListener("click", closeMobileMenu);
-    }
-  }
-
-  function setupDesktopServices() {
-    const trigger = document.querySelector(".services-trigger") as HTMLElement;
-
-    if (trigger) {
-      trigger.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleDesktopServices();
-      });
-    }
-
-    // Close when clicking outside
-    document.addEventListener("click", (e) => {
-      const dropdown = document.querySelector(
-        ".services-dropdown"
-      ) as HTMLElement;
-      if (dropdown && !dropdown.contains(e.target as Node) && isServicesOpen) {
-        closeDesktopServices();
-      }
-    });
-  }
-
-  function setupMobileServices() {
-    const trigger = document.querySelector(
-      '[data-mobile-services="trigger"]'
-    ) as HTMLElement;
-
-    if (trigger) {
-      console.log("Mobile services trigger found, adding event listener");
-      trigger.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        console.log(
-          "Mobile services clicked, current state:",
-          isMobileServicesOpen
-        );
-        toggleMobileServices();
-      });
-    } else {
-      console.error("Mobile services trigger not found!");
-    }
-  }
-
-  function setupCloseHandlers() {
-    // Overlay click
-    const overlay = document.querySelector(".mobile-overlay") as HTMLElement;
-    if (overlay) {
-      overlay.addEventListener("click", closeMobileMenu);
-    }
-
-    // Nav links
-    const links = document.querySelectorAll(
-      ".mobile-nav-link, .mobile-service-link"
-    );
-    links.forEach((link) => {
-      link.addEventListener("click", closeMobileMenu);
-    });
-  }
-
-  function toggleMobileMenu() {
-    console.log("Toggling mobile menu, current state:", isMenuOpen);
-    isMenuOpen = !isMenuOpen;
-
-    const menu = document.querySelector(".mobile-menu") as HTMLElement;
-    const overlay = document.querySelector(".mobile-overlay") as HTMLElement;
-    const openIcon = document.querySelector(".menu-open") as HTMLElement;
-    const closeIcon = document.querySelector(".menu-close") as HTMLElement;
-
-    if (isMenuOpen) {
-      // Open menu
-      if (menu) {
-        menu.style.transform = "translateY(0)";
-        menu.style.opacity = "1";
-      }
-      if (overlay) {
-        overlay.style.opacity = "1";
-        overlay.style.visibility = "visible";
-      }
-      if (openIcon && closeIcon) {
-        openIcon.classList.add("hidden");
-        closeIcon.classList.remove("hidden");
-      }
-    } else {
-      closeMobileMenu();
-    }
-  }
-
-  function closeMobileMenu() {
-    console.log("Closing mobile menu");
+  // Close all menus function
+  function closeAllMenus() {
     isMenuOpen = false;
+    isServicesOpen = false;
     isMobileServicesOpen = false;
 
-    const menu = document.querySelector(".mobile-menu") as HTMLElement;
+    const mobileMenu = document.querySelector(".mobile-menu") as HTMLElement;
     const overlay = document.querySelector(".mobile-overlay") as HTMLElement;
-    const openIcon = document.querySelector(".menu-open") as HTMLElement;
-    const closeIcon = document.querySelector(".menu-close") as HTMLElement;
+    const servicesMenu = document.querySelector(
+      ".services-menu"
+    ) as HTMLElement;
+    const mobileServicesMenu = document.querySelector(
+      ".mobile-services-menu"
+    ) as HTMLElement;
+    const servicesArrow = document.querySelector(
+      ".services-arrow"
+    ) as HTMLElement;
+    const mobileServicesArrow = document.querySelector(
+      ".mobile-services-arrow"
+    ) as HTMLElement;
+    const menuOpen = document.querySelector(".menu-open") as HTMLElement;
+    const menuClose = document.querySelector(".menu-close") as HTMLElement;
 
-    if (menu) {
-      menu.style.transform = "translateY(-100%)";
-      menu.style.opacity = "0";
+    if (mobileMenu) {
+      mobileMenu.style.transform = "translateY(-100%)";
+      mobileMenu.style.opacity = "0";
     }
     if (overlay) {
       overlay.style.opacity = "0";
       overlay.style.visibility = "hidden";
     }
-    if (openIcon && closeIcon) {
-      openIcon.classList.remove("hidden");
-      closeIcon.classList.add("hidden");
+    if (servicesMenu) {
+      servicesMenu.style.opacity = "0";
+      servicesMenu.style.visibility = "hidden";
     }
-
-    // Also close mobile services
-    closeMobileServices();
+    if (mobileServicesMenu) {
+      mobileServicesMenu.style.maxHeight = "0";
+    }
+    if (servicesArrow) {
+      servicesArrow.style.transform = "rotate(0deg)";
+    }
+    if (mobileServicesArrow) {
+      mobileServicesArrow.style.transform = "rotate(0deg)";
+    }
+    if (menuOpen && menuClose) {
+      menuOpen.classList.remove("hidden");
+      menuClose.classList.add("hidden");
+    }
   }
 
-  function toggleDesktopServices() {
-    isServicesOpen = !isServicesOpen;
+  // Initialize everything when DOM is loaded
+  document.addEventListener("DOMContentLoaded", function () {
+    initializeMenus();
 
-    const menu = document.querySelector(".services-menu") as HTMLElement;
-    const arrow = document.querySelector(".services-arrow") as HTMLElement;
+    // Add scroll event listener
+    window.addEventListener("scroll", handleScroll);
 
-    if (menu && arrow) {
-      if (isServicesOpen) {
-        menu.style.opacity = "1";
-        menu.style.visibility = "visible";
-        arrow.style.transform = "rotate(180deg)";
-      } else {
-        closeDesktopServices();
+    // Mobile menu toggle
+    const mobileMenuToggle = document.querySelector(
+      ".mobile-menu-toggle"
+    ) as HTMLElement;
+    if (mobileMenuToggle) {
+      mobileMenuToggle.addEventListener("click", () => {
+        isMenuOpen = !isMenuOpen;
+        const mobileMenu = document.querySelector(
+          ".mobile-menu"
+        ) as HTMLElement;
+        const overlay = document.querySelector(
+          ".mobile-overlay"
+        ) as HTMLElement;
+        const menuOpen = document.querySelector(".menu-open") as HTMLElement;
+        const menuClose = document.querySelector(".menu-close") as HTMLElement;
+
+        if (isMenuOpen) {
+          if (mobileMenu) {
+            mobileMenu.style.transform = "translateY(0)";
+            mobileMenu.style.opacity = "1";
+          }
+          if (overlay) {
+            overlay.style.opacity = "1";
+            overlay.style.visibility = "visible";
+          }
+          if (menuOpen && menuClose) {
+            menuOpen.classList.add("hidden");
+            menuClose.classList.remove("hidden");
+          }
+        } else {
+          closeAllMenus();
+        }
+      });
+    }
+
+    // Mobile menu close button
+    const mobileMenuClose = document.querySelector(
+      ".mobile-menu-close"
+    ) as HTMLElement;
+    if (mobileMenuClose) {
+      mobileMenuClose.addEventListener("click", closeAllMenus);
+    }
+
+    // Desktop services dropdown
+    const servicesDropdown = document.querySelector(
+      ".services-dropdown"
+    ) as HTMLElement;
+    if (servicesDropdown) {
+      const servicesTrigger = servicesDropdown.querySelector(
+        ".services-trigger"
+      ) as HTMLElement;
+      const servicesMenu = servicesDropdown.querySelector(
+        ".services-menu"
+      ) as HTMLElement;
+      const servicesArrow = servicesDropdown.querySelector(
+        ".services-arrow"
+      ) as HTMLElement;
+
+      if (servicesTrigger) {
+        servicesTrigger.addEventListener("click", (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+
+          isServicesOpen = !isServicesOpen;
+          if (servicesMenu && servicesArrow) {
+            if (isServicesOpen) {
+              servicesMenu.style.opacity = "1";
+              servicesMenu.style.visibility = "visible";
+              servicesArrow.style.transform = "rotate(180deg)";
+            } else {
+              servicesMenu.style.opacity = "0";
+              servicesMenu.style.visibility = "hidden";
+              servicesArrow.style.transform = "rotate(0deg)";
+            }
+          }
+        });
       }
     }
-  }
 
-  function closeDesktopServices() {
-    isServicesOpen = false;
-
-    const menu = document.querySelector(".services-menu") as HTMLElement;
-    const arrow = document.querySelector(".services-arrow") as HTMLElement;
-
-    if (menu) {
-      menu.style.opacity = "0";
-      menu.style.visibility = "hidden";
-    }
-    if (arrow) {
-      arrow.style.transform = "rotate(0deg)";
-    }
-  }
-
-  function toggleMobileServices() {
-    console.log(
-      "toggleMobileServices called, current state:",
-      isMobileServicesOpen
-    );
-    isMobileServicesOpen = !isMobileServicesOpen;
-
-    const content = document.querySelector(
-      '[data-mobile-services="content"]'
+    // Mobile services dropdown
+    const mobileServicesTrigger = document.querySelector(
+      ".mobile-services-trigger"
     ) as HTMLElement;
-    const chevron = document.querySelector(
-      ".mobile-services-chevron"
-    ) as HTMLElement;
+    if (mobileServicesTrigger) {
+      mobileServicesTrigger.addEventListener("click", () => {
+        isMobileServicesOpen = !isMobileServicesOpen;
+        const mobileServicesMenu = document.querySelector(
+          ".mobile-services-menu"
+        ) as HTMLElement;
+        const mobileServicesArrow = document.querySelector(
+          ".mobile-services-arrow"
+        ) as HTMLElement;
 
-    console.log("Content element:", content);
-    console.log("Chevron element:", chevron);
+        if (mobileServicesMenu && mobileServicesArrow) {
+          if (isMobileServicesOpen) {
+            mobileServicesMenu.style.maxHeight = `${mobileServicesMenu.scrollHeight}px`;
+            mobileServicesArrow.style.transform = "rotate(180deg)";
+          } else {
+            mobileServicesMenu.style.maxHeight = "0";
+            mobileServicesArrow.style.transform = "rotate(0deg)";
+          }
+        }
+      });
+    }
 
-    if (content && chevron) {
-      if (isMobileServicesOpen) {
-        console.log("Opening mobile services");
-        content.classList.remove("hidden");
-        chevron.style.transform = "rotate(180deg)";
-      } else {
-        console.log("Closing mobile services");
-        content.classList.add("hidden");
-        chevron.style.transform = "rotate(0deg)";
+    // Close menus when clicking on overlay
+    const overlay = document.querySelector(".mobile-overlay") as HTMLElement;
+    if (overlay) {
+      overlay.addEventListener("click", closeAllMenus);
+    }
+
+    // Close menus when clicking on nav links
+    const mobileNavLinks = document.querySelectorAll(
+      ".mobile-nav-link, .mobile-service-link"
+    ) as NodeListOf<HTMLElement>;
+    mobileNavLinks.forEach((link) => {
+      link.addEventListener("click", closeAllMenus);
+    });
+
+    // Close desktop services menu when clicking outside
+    document.addEventListener("click", (e) => {
+      const servicesDropdown = document.querySelector(
+        ".services-dropdown"
+      ) as HTMLElement;
+      if (
+        servicesDropdown &&
+        !servicesDropdown.contains(e.target as Node) &&
+        isServicesOpen
+      ) {
+        isServicesOpen = false;
+        const servicesMenu = servicesDropdown.querySelector(
+          ".services-menu"
+        ) as HTMLElement;
+        const servicesArrow = servicesDropdown.querySelector(
+          ".services-arrow"
+        ) as HTMLElement;
+        if (servicesMenu && servicesArrow) {
+          servicesMenu.style.opacity = "0";
+          servicesMenu.style.visibility = "hidden";
+          servicesArrow.style.transform = "rotate(0deg)";
+        }
       }
-    } else {
-      console.error("Mobile services elements not found!");
-    }
-  }
-
-  function closeMobileServices() {
-    console.log("Closing mobile services");
-    isMobileServicesOpen = false;
-
-    const content = document.querySelector(
-      '[data-mobile-services="content"]'
-    ) as HTMLElement;
-    const chevron = document.querySelector(
-      ".mobile-services-chevron"
-    ) as HTMLElement;
-
-    if (content) {
-      content.classList.add("hidden");
-    }
-    if (chevron) {
-      chevron.style.transform = "rotate(0deg)";
-    }
-  }
-
-  // Handle window resize
-  window.addEventListener("resize", () => {
-    if (window.innerWidth >= 1024) {
-      closeMobileMenu();
-      closeDesktopServices();
-    }
+    });
   });
 </script>
 
@@ -486,28 +504,5 @@ const serviceItems = [
   .dark .header-bg.scrolled {
     background: rgba(17, 24, 39, 0.95);
     border-bottom-color: rgba(55, 65, 81, 1);
-  }
-
-  /* Mobile services animations */
-  .mobile-services-content {
-    transition: all 0.3s ease;
-    overflow: hidden;
-  }
-
-  .mobile-services-content.hidden {
-    display: none;
-  }
-
-  .mobile-services-chevron {
-    transition: transform 0.3s ease;
-  }
-
-  /* Debug styles - remove these once working */
-  .mobile-services-btn {
-    background: white !important; /* Red tint to see if it's there */
-  }
-
-  .mobile-services-content {
-    background: white !important; /* Green tint to see content */
   }
 </style>
