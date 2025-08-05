@@ -70,9 +70,7 @@ const serviceItems = [
             class="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium text-sm uppercase tracking-wider services-trigger"
           >
             <span>Services</span>
-            <ChevronDown
-              className="w-4 h-4 transition-transform services-arrow"
-            />
+            <ChevronDown class="w-4 h-4 transition-transform services-arrow" />
           </button>
 
           <div
@@ -105,11 +103,9 @@ const serviceItems = [
           class="lg:hidden p-2 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors mobile-menu-toggle"
           aria-label="Toggle menu"
         >
-          <Menu
-            className="w-5 h-5 text-gray-600 dark:text-gray-300 menu-open"
-          />
+          <Menu class="w-5 h-5 text-gray-600 dark:text-gray-300 menu-open" />
           <X
-            className="w-5 h-5 text-gray-600 dark:text-gray-300 menu-close hidden"
+            class="w-5 h-5 text-gray-600 dark:text-gray-300 menu-close hidden"
           />
         </button>
       </div>
@@ -143,7 +139,7 @@ const serviceItems = [
             class="p-2 rounded-lg flex justify-center items-center bg-white/10 hover:bg-white/20 transition-colors mobile-menu-close"
             aria-label="Close menu"
           >
-            <X className="w-5 h-5 text-white" />
+            <X class="w-5 h-5 text-white" />
           </button>
         </div>
       </div>
@@ -167,23 +163,34 @@ const serviceItems = [
           >
             <span>Services</span>
             <ChevronDown
+<<<<<<< HEAD
               className="w-4 h-4 transition-transform mobile-services-arrow"
+=======
+              class="w-4 h-4 transition-all duration-300 mobile-services-arrow"
+>>>>>>> e64c21b (fixed dropdown)
             />
           </button>
 
           <div
+<<<<<<< HEAD
             class="pb-2 mobile-services-menu max-h-0 overflow-hidden transition-all duration-300"
+=======
+            class="mobile-services-menu overflow-hidden transition-all duration-300 ease-in-out"
+            style="max-height: 0;"
+>>>>>>> e64c21b (fixed dropdown)
           >
-            {
-              serviceItems.map((service) => (
-                <a
-                  href={service.href}
-                  class="block py-2 pl-4 text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors text-sm mobile-service-link"
-                >
-                  {service.name}
-                </a>
-              ))
-            }
+            <div class="pb-2">
+              {
+                serviceItems.map((service) => (
+                  <a
+                    href={service.href}
+                    class="block py-2 pl-4 text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors text-sm mobile-service-link"
+                  >
+                    {service.name}
+                  </a>
+                ))
+              }
+            </div>
           </div>
         </div>
 
@@ -251,6 +258,13 @@ const serviceItems = [
     // Ensure mobile services menu is collapsed
     if (mobileServicesMenu) {
       mobileServicesMenu.style.maxHeight = "0";
+<<<<<<< HEAD
+=======
+      mobileServicesMenu.style.overflow = "hidden";
+    }
+    if (mobileServicesArrow) {
+      mobileServicesArrow.style.transform = "rotate(0deg)";
+>>>>>>> e64c21b (fixed dropdown)
     }
 
     // Reset arrow rotations
@@ -321,6 +335,10 @@ const serviceItems = [
     }
     if (mobileServicesMenu) {
       mobileServicesMenu.style.maxHeight = "0";
+<<<<<<< HEAD
+=======
+      mobileServicesMenu.style.overflow = "hidden";
+>>>>>>> e64c21b (fixed dropdown)
     }
     if (servicesArrow) {
       servicesArrow.style.transform = "rotate(0deg)";
@@ -377,12 +395,24 @@ const serviceItems = [
     }
 
     // Mobile menu close button
+<<<<<<< HEAD
     const mobileMenuClose = document.querySelector(
       ".mobile-menu-close"
     ) as HTMLElement;
     if (mobileMenuClose) {
       mobileMenuClose.addEventListener("click", closeAllMenus);
     }
+=======
+    document.body.addEventListener("click", function (e) {
+      const target = e.target as HTMLElement;
+
+      // Close if clicked on close button inside mobile menu
+      if (target.closest(".mobile-menu-close")) {
+        e.preventDefault();
+        closeAllMenus();
+      }
+    });
+>>>>>>> e64c21b (fixed dropdown)
 
     // Desktop services dropdown
     const servicesDropdown = document.querySelector(
@@ -420,7 +450,11 @@ const serviceItems = [
       }
     }
 
+<<<<<<< HEAD
     // Mobile services dropdown
+=======
+    // Mobile services dropdown - FIXED
+>>>>>>> e64c21b (fixed dropdown)
     const mobileServicesTrigger = document.querySelector(
       ".mobile-services-trigger"
     ) as HTMLElement;
@@ -436,7 +470,16 @@ const serviceItems = [
 
         if (mobileServicesMenu && mobileServicesArrow) {
           if (isMobileServicesOpen) {
+<<<<<<< HEAD
             mobileServicesMenu.style.maxHeight = `${mobileServicesMenu.scrollHeight}px`;
+=======
+            // Calculate the actual content height
+            const contentDiv = mobileServicesMenu.querySelector(
+              "div"
+            ) as HTMLElement;
+            const contentHeight = contentDiv ? contentDiv.scrollHeight : 0;
+            mobileServicesMenu.style.maxHeight = `${contentHeight + 16}px`; // Adding some padding
+>>>>>>> e64c21b (fixed dropdown)
             mobileServicesArrow.style.transform = "rotate(180deg)";
           } else {
             mobileServicesMenu.style.maxHeight = "0";
