@@ -22,7 +22,7 @@ const serviceItems = [
 ---
 
 <header
-  class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-lg header-bg"
+  class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 header-bg"
 >
   <div class="container mx-auto px-4 py-3 lg:py-4">
     <div class="flex items-center justify-between">
@@ -480,6 +480,14 @@ const serviceItems = [
 <style>
   .header-bg {
     background: transparent;
+  }
+
+  .header-bg.scrolled {
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(229, 231, 235, 1);
+    box-shadow:
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
 
   .dark .header-bg.scrolled {
