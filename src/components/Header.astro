@@ -266,9 +266,9 @@ const serviceItems = [
       const header = document.querySelector("header") as HTMLElement;
       if (header) {
         if (isScrolled) {
-          header.classList.add("scrolled");
+          header.classList.add("shadow-lg", "backdrop-blur-md");
         } else {
-          header.classList.remove("scrolled");
+          header.classList.remove("shadow-lg", "backdrop-blur-md");
         }
       }
     }
@@ -476,22 +476,3 @@ const serviceItems = [
     });
   });
 </script>
-
-<style>
-  .header-bg.scrolled {
-    background-color: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(229, 231, 235, 1);
-    box-shadow:
-      0 10px 15px -3px rgba(0, 0, 0, 0.1),
-      0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  }
-
-  .dark .header-bg.scrolled {
-    background-color: rgba(10, 10, 15, 0.95) !important; /* force override */
-    border-bottom-color: rgba(55, 65, 81, 1);
-    box-shadow:
-      0 10px 15px -3px rgba(0, 0, 0, 0.3),
-      0 4px 6px -2px rgba(0, 0, 0, 0.2);
-  }
-</style>
