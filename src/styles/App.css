@@ -124,20 +124,104 @@ body {
   100% { clip: rect(75px, 9999px, 90px, 0); transform: skew(0.4deg); }
 }
 
-/* Decorative elements */
+/* Decorative elements - ENHANCED ORGANIC SHAPES */
 .organic-shape {
-  position: absolute;
-  background: var(--gradient-primary);
-  border-radius: 50% 20% 80% 30%;
-  animation: organic-morph 20s infinite;
-  opacity: 0.1;
+  position: absolute !important;
+  border-radius: 50% 20% 80% 30% !important;
+  opacity: 0.030 !important;
+  background: linear-gradient(135deg, #eb841c, #8B5CF6) !important;
+  animation: organic-morph 20s infinite ease-in-out !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
 }
+
+/* Enhanced keyframes for better morphing */
 @keyframes organic-morph {
-  0%, 100% { border-radius: 50% 20% 80% 30%; transform: rotate(0deg) scale(1); }
-  25%     { border-radius: 20% 80% 40% 60%; transform: rotate(90deg) scale(1.2); }
-  50%     { border-radius: 80% 30% 50% 70%; transform: rotate(180deg) scale(0.8); }
-  75%     { border-radius: 30% 70% 60% 40%; transform: rotate(270deg) scale(1.1); }
+  0%, 100% {
+    border-radius: 50% 20% 80% 30%;
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    border-radius: 20% 80% 40% 60%;
+    transform: rotate(90deg) scale(1.2);
+  }
+  50% {
+    border-radius: 80% 30% 50% 70%;
+    transform: rotate(180deg) scale(0.8);
+  }
+  75% {
+    border-radius: 30% 70% 60% 40%;
+    transform: rotate(270deg) scale(1.1);
+  }
 }
+
+/* Ensure proper stacking context */
+section {
+  position: relative;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 10;
+}
+
+/* Specific positioning for organic shapes */
+.organic-shape:nth-child(1) {
+  width: 12rem !important;
+  height: 12rem !important;
+  top: 2.5rem !important;
+  left: 1.5rem !important;
+  animation-delay: 0s !important;
+}
+
+.organic-shape:nth-child(2) {
+  width: 10rem !important;
+  height: 10rem !important;
+  top: 6rem !important;
+  right: 3rem !important;
+  animation-delay: 5s !important;
+}
+
+.organic-shape:nth-child(3) {
+  width: 11rem !important;
+  height: 11rem !important;
+  bottom: 2rem !important;
+  left: 3rem !important;
+  animation-delay: 10s !important;
+}
+
+/* Cross-browser compatibility */
+.organic-shape {
+  -webkit-animation: organic-morph 20s infinite ease-in-out !important;
+  -moz-animation: organic-morph 20s infinite ease-in-out !important;
+  -ms-animation: organic-morph 20s infinite ease-in-out !important;
+  -o-animation: organic-morph 20s infinite ease-in-out !important;
+}
+
+@-webkit-keyframes organic-morph {
+  0%, 100% {
+    border-radius: 50% 20% 80% 30%;
+    -webkit-transform: rotate(0deg) scale(1);
+    transform: rotate(0deg) scale(1);
+  }
+  25% {
+    border-radius: 20% 80% 40% 60%;
+    -webkit-transform: rotate(90deg) scale(1.2);
+    transform: rotate(90deg) scale(1.2);
+  }
+  50% {
+    border-radius: 80% 30% 50% 70%;
+    -webkit-transform: rotate(180deg) scale(0.8);
+    transform: rotate(180deg) scale(0.8);
+  }
+  75% {
+    border-radius: 30% 70% 60% 40%;
+    -webkit-transform: rotate(270deg) scale(1.1);
+    transform: rotate(270deg) scale(1.1);
+  }
+}
+
 .floating-element {
   animation: float 6s ease-in-out infinite;
 }
@@ -202,7 +286,7 @@ body {
   50% { opacity: 0.7; transform: scale(1.02); }
 }
 
-
+/* Mobile responsive organic shapes */
 @media (max-width: 768px) {
   .glitch-text {
     font-size: clamp(1.2rem, 8vw, 2.5rem);
@@ -216,6 +300,28 @@ body {
   .brutalist-container {
     box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
   }
+
+  /* Smaller organic shapes on mobile */
+  .organic-shape:nth-child(1) {
+    width: 8rem !important;
+    height: 8rem !important;
+    top: 1rem !important;
+    left: 1rem !important;
+  }
+
+  .organic-shape:nth-child(2) {
+    width: 6rem !important;
+    height: 6rem !important;
+    top: 3rem !important;
+    right: 1rem !important;
+  }
+
+  .organic-shape:nth-child(3) {
+    width: 7rem !important;
+    height: 7rem !important;
+    bottom: 1rem !important;
+    left: 1rem !important;
+  }
 }
 
 @media (max-width: 640px) {
@@ -223,8 +329,23 @@ body {
     font-size: clamp(1rem, 10vw, 2rem);
   }
   
-  .organic-shape {
-    display: none;
+  /* Keep organic shapes visible on small screens but make them smaller */
+  .organic-shape:nth-child(1) {
+    width: 5rem !important;
+    height: 5rem !important;
+    opacity: 0.030 !important;
+  }
+
+  .organic-shape:nth-child(2) {
+    width: 8rem !important;
+    height: 8rem !important;
+    opacity: 0.030 !important;
+  }
+
+  .organic-shape:nth-child(3) {
+    width: 8rem !important;
+    height: 8rem !important;
+    opacity: 0.030 !important;
   }
   
   .card-3d:hover {
@@ -233,12 +354,60 @@ body {
   }
 }
 
+/* Tablet responsive */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .organic-shape:nth-child(1) {
+    width: 10rem !important;
+    height: 10rem !important;
+    top: 2rem !important;
+    left: 1.5rem !important;
+  }
+
+  .organic-shape:nth-child(2) {
+    width: 8rem !important;
+    height: 8rem !important;
+    top: 4rem !important;
+    right: 2rem !important;
+  }
+
+  .organic-shape:nth-child(3) {
+    width: 9rem !important;
+    height: 9rem !important;
+    bottom: 1.5rem !important;
+    left: 2rem !important;
+  }
+}
+
+/* Desktop responsive */
+@media (min-width: 1025px) {
+  .organic-shape:nth-child(1) {
+    width: 16rem !important;
+    height: 16rem !important;
+    top: 3rem !important;
+    left: 2rem !important;
+  }
+
+  .organic-shape:nth-child(2) {
+    width: 12rem !important;
+    height: 12rem !important;
+    top: 8rem !important;
+    right: 4rem !important;
+  }
+
+  .organic-shape:nth-child(3) {
+    width: 14rem !important;
+    height: 14rem !important;
+    bottom: 3rem !important;
+    left: 4rem !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .neon-text,
   .organic-shape,
   .floating-element,
   .card-3d {
-    animation: none;
+    animation: none !important;
   }
   
   .glitch-text::before,
@@ -293,8 +462,6 @@ body {
     filter: brightness(0) invert(1); /* If logo is dark, invert it */
   }
 }
-
-
 
 /* Responsive Typography */
 @media (max-width: 768px) {
@@ -436,4 +603,18 @@ body {
 /* Overlay fade animation */
 .animate-overlay {
   animation: fadeIn 0.2s ease-out forwards;
+}
+
+/* Additional backdrop effect for organic shapes */
+.organic-shape::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  border-radius: inherit;
+  filter: blur(1px);
+  z-index: -1;
 }

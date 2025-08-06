@@ -1,10 +1,10 @@
 import { defineConfig } from "astro/config";
 import react from "@astrojs/react";
 import tailwind from "@astrojs/tailwind";
-import vercel from "@astrojs/vercel/static"; // Use static adapter for static export
+import vercel from "@astrojs/vercel/static"; // ✅ Updated static adapter import
 
 export default defineConfig({
-  output: "static", // Enables static site generation
+  output: "static",
   adapter: vercel(),
   integrations: [react(), tailwind()],
 });

@@ -1,6 +1,7 @@
 // tailwind.config.ts
 export default {
-  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  content: ['./src/**/*.{astro,html,js,jsx,ts,tsx}'],
+
   darkMode: 'media', // ✅ this uses system preference (no class="dark" needed)
   theme: {
     extend: {},

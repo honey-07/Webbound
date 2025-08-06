@@ -1,5 +1,5 @@
 ---
-import { Menu, X, Moon, Sun, Code, Zap, ChevronDown } from "lucide-react";
+import { Menu, X, Moon, Sun, Code, Zap, ChevronDown } from "lucide-astro";
 import Logo from "../assets/logo.webp";
 
 const navItems = [
@@ -22,8 +22,7 @@ const serviceItems = [
 ---
 
 <header
-  class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 shadow-lg"
-  class="fixed w-full top-0 z-50 transition-all duration-300 header-bg"
+  class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 header-bg"
 >
   <div class="container mx-auto px-4 py-3 lg:py-4">
     <div class="flex items-center justify-between">
@@ -70,9 +69,7 @@ const serviceItems = [
             class="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 transition-colors font-medium text-sm uppercase tracking-wider services-trigger"
           >
             <span>Services</span>
-            <ChevronDown
-              className="w-4 h-4 transition-transform services-arrow"
-            />
+            <ChevronDown class="w-4 h-4 transition-transform services-arrow" />
           </button>
 
           <div
@@ -105,11 +102,9 @@ const serviceItems = [
           class="lg:hidden p-2 flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors mobile-menu-toggle"
           aria-label="Toggle menu"
         >
-          <Menu
-            className="w-5 h-5 text-gray-600 dark:text-gray-300 menu-open"
-          />
+          <Menu class="w-5 h-5 text-gray-600 dark:text-gray-300 menu-open" />
           <X
-            className="w-5 h-5 text-gray-600 dark:text-gray-300 menu-close hidden"
+            class="w-5 h-5 text-gray-600 dark:text-gray-300 menu-close hidden"
           />
         </button>
       </div>
@@ -143,7 +138,7 @@ const serviceItems = [
             class="p-2 rounded-lg flex justify-center items-center bg-white/10 hover:bg-white/20 transition-colors mobile-menu-close"
             aria-label="Close menu"
           >
-            <X className="w-5 h-5 text-white" />
+            <X class="w-5 h-5 text-white" />
           </button>
         </div>
       </div>
@@ -167,7 +162,7 @@ const serviceItems = [
           >
             <span>Services</span>
             <ChevronDown
-              className="w-4 h-4 transition-transform mobile-services-arrow"
+              class="w-4 h-4 transition-transform mobile-services-arrow"
             />
           </button>
 
