@@ -22,7 +22,7 @@ const serviceItems = [
 ---
 
 <header
-  class="fixed w-full top-0 z-50 transition-all duration-300 bg-white/95 border-white dark:bg-gray-900/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 header-bg"
+  class="fixed w-full top-0 z-50 transition-all duration-300 bg-transparent dark:bg-transparent header-bg"
 >
   <div class="container mx-auto px-4 py-3 lg:py-4">
     <div class="flex items-center justify-between">
@@ -261,15 +261,31 @@ const serviceItems = [
   // Header scroll effect
   function handleScroll() {
     const scrolled = window.scrollY > 20;
-    if (scrolled !== isScrolled) {
+    const header = document.querySelector("header") as HTMLElement;
+
+    if (header && scrolled !== isScrolled) {
       isScrolled = scrolled;
-      const header = document.querySelector("header") as HTMLElement;
-      if (header) {
-        if (isScrolled) {
-          header.classList.add("shadow-lg", "backdrop-blur-md");
-        } else {
-          header.classList.remove("shadow-lg", "backdrop-blur-md");
-        }
+
+      if (isScrolled) {
+        header.classList.add(
+          "bg-white/95",
+          "dark:bg-gray-900/95",
+          "border-b",
+          "border-gray-200",
+          "dark:border-gray-700",
+          "backdrop-blur-md",
+          "shadow-lg"
+        );
+      } else {
+        header.classList.remove(
+          "bg-white/95",
+          "dark:bg-gray-900/95",
+          "border-b",
+          "border-gray-200",
+          "dark:border-gray-700",
+          "backdrop-blur-md",
+          "shadow-lg"
+        );
       }
     }
   }
